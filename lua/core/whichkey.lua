@@ -94,6 +94,8 @@ local mappings = {
     "Find files",
   },
   ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
+  ["H"] = { "<cmd>split<CR>", "Horizontal split" },
+  ["V"] = { "<cmd>vsplit<CR>", "Vertical split" },
   ["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
   ["T"] = { "<cmd>lua  vim.fn.feedkeys(':Template ')<cr>", "Template" },
 
@@ -199,7 +201,7 @@ local mappings = {
     b = { "<cmd>Telescope dap list_breakpoints<CR>", "Telescope list_breakpoints" },
   },
 
-  tc = {
+  C = {
     name = "Todo Comments",
     p = { "<cmd>lua perf()<CR>", "Performance" },
     h = { "<cmd>lua hack()<CR>", "Hack" },
@@ -215,7 +217,42 @@ local mappings = {
     r = { "<cmd>lua require('psql').query_paragraph()<CR>", "execute_paragraph" },
     w = { "<cmd>lua require('psql').close_latest_result()<CR>", "close_latest_result" },
     W = { "<cmd>lua require('psql').close_all_results()<CR>", "close_all_results" },
-  }
+  },
+
+  n = {
+    name = "Neorg",
+    c = { "<cmd>Neorg keybind norg core.dirman.new.note<CR>", "Create new note" },
+    i = { "<cmd>lua Neorg inject-metadata<CR>", "Create metadata" },
+    u = { "<cmd>lua Neorg update-metadata<CR>", "Update-metadata" },
+    h = { "<cmd>lua Neorg workspace home<CR>", "home" },
+    w = { "<cmd>lua Neorg workspace work<CR>", "work" },
+    t = {
+      name = "Todo",
+      u = { "<cmd>Neorg keybind norg core.qol.todo_items.todo.task_undon<CR>", "Mark Task as Undone" },
+      p = { "<cmd>Neorg keybind norg core.qol.todo_items.todo.pending<CR>", "Mark Task as Pending" },
+      d = { "<cmd>Neorg keybind norg core.qol.todo_items.todo.task_done<CR>", "Mark Task as Done" },
+      h = { "<cmd>Neorg keybind norg core.qol.todo_items.todo.task_on_hold<CR>", "Mark Task as on Hold" },
+      c = { "<cmd>Neorg keybind norg core.qol.todo_items.todo.task_cancelled<CR>", "Mark Task as on Cancelled" },
+      r = { "<cmd>Neorg keybind norg core.qol.todo_items.todo.task_recurring<CR>", "Mark Task as on Recurring" },
+      i = { "<cmd>Neorg keybind norg core.qol.todo_items.todo.task_importan<CR>", "Mark Task as on Importan" },
+      C = { "<cmd>Neorg keybind norg core.qol.todo_items.todo.task_cycle<CR>", "Mark Task as on Cycle" },
+      R = { "<cmd>Neorg keybind norg core.qol.todo_items.todo.task_cycle_reverse<CR>", "Mark Task as on cycle_reverse" },
+    },
+    T = {
+      name = "TOC",
+      l = { "<cmd>lua Neorg toc left<CR>", "Left TOC" },
+      r = { "<cmd>lua Neorg toc right<CR>", "Right TOC" },
+      q = { "<cmd>lua Neorg toc qflist<CR>", "Qflist TOC" },
+    },
+    j = {
+      name = "journal",
+      t = { "<cmd>lua Neorg journal today<CR>", "Today" },
+      y = { "<cmd>lua Neorg journal yesterday<CR>", "yesterday" },
+      T = { "<cmd>lua Neorg journal tomorrow<CR>", "Tomorrow" },
+      o = { "<cmd>lua Neorg journal toc open<CR>", "TOC open" },
+      u = { "<cmd>lua Neorg journal toc update<CR>", "TOC update" },
+    },
+  },
 }
 
 which_key.setup(setup)

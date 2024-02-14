@@ -6,7 +6,12 @@ end
 neorg.setup({
   load = {
     ["core.defaults"] = {},
-    ["core.concealer"] = {},  -- Adds pretty icons to your documents
+    ["core.completion"] = {
+      config = {
+        engine = "nvim-cmp",
+      },
+    },
+    ["core.concealer"] = {}, -- Adds pretty icons to your documents
     ["core.dirman"] = {
       config = {
         workspaces = {
@@ -15,7 +20,18 @@ neorg.setup({
         },
         index = "index.norg"
       }
-    }
+    },
+    ["core.export"] = {},
+    ["core.export.markdown"] = {},
+    ["core.ui"] = {},
+    ["core.integrations.nvim-cmp"] = {
+      config = {
+        sources = {
+          { name = "neorg" },
+        }
+      }
+    },
+    ["core.integrations.treesitter"] = {},
   },
   languages = {
     lua = { template = { annotation_convention = 'emmylua' } },

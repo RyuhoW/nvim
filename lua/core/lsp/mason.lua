@@ -8,8 +8,8 @@ local servers = {
   "clangd",
   "tailwindcss",
   "gopls",
-  -- "denols",
-  "biome"
+  "biome",
+  "tsserver"
 }
 
 local settings = {

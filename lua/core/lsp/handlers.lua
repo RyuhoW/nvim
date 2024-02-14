@@ -1,5 +1,13 @@
 local M = {}
 
+local status_cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not status_cmp_ok then
+  return
+end
+
+M.capabilities = vim.lsp.protocol.make_client_capabilities()
+M.capabilities.textDocument.completion.completionItem.snippetSupport = true
+M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 
 M.setup = function()
   local signs = {
@@ -19,7 +27,7 @@ M.setup = function()
     -- show signs
     signs = {
       active = signs,
-       priority = 9999,
+      priority = 9999,
     },
     update_in_insert = true,
     underline = true,
@@ -45,16 +53,7 @@ M.setup = function()
   })
 end
 
-
-M.on_attach = function(client, bufnr)
-  local function
-  buf_set_option(name, value)
-    vim.api.nvim_buf_set_option(bufnr, name, value)
-  end
-
-  buf_set_option('omnifunc', 'v:lua.MiniCompletion.completefunc_lsp')
-
-
+local function lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = true }
   local keymap = vim.api.nvim_buf_set_keymap
   keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
@@ -72,6 +71,11 @@ M.on_attach = function(client, bufnr)
   keymap(bufnr, "n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
   keymap(bufnr, "n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
   keymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+end
+
+
+M.on_attach = function(client, bufnr)
+  lsp_keymaps(bufnr)
 
   -- Currently all formatting is handled with 'null-ls' plugin
   if vim.fn.has('nvim-0.8') == 1 then
