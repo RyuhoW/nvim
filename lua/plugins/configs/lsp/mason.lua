@@ -41,13 +41,13 @@ local opts = {}
 
 for _, server in pairs(servers) do
   opts = {
-    on_attach = require("core.lsp.handlers").on_attach,
+    on_attach = require("plugins.configs.lsp.handlers").on_attach,
     flags = { debounce_text_changes = 150 },
   }
 
   server = vim.split(server, "@")[1]
 
-  local require_ok, conf_opts = pcall(require, "core.lsp.settings." .. server)
+  local require_ok, conf_opts = pcall(require, "plugins.configs.lsp.settings." .. server)
   if require_ok then
     opts = vim.tbl_deep_extend("force", conf_opts, opts)
   end

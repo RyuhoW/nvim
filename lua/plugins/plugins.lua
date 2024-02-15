@@ -1,29 +1,4 @@
-local fn = vim.fn
-
-local lazypath = fn.stdpath("data") .. "/lazy/lazy.nvim"
-if fn.empty(fn.glob(lazypath)) > 0 then
-  fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latestjstable release
-    lazypath,
-  })
-  print("Installing lazy.nvim close and reopen Neovim.")
-end
-vim.opt.rtp:prepend(lazypath)
-
--- Use a protexted call so we don't error out on first use
-local status_ok, lazy = pcall(require, "lazy")
-if not status_ok then
-  return
-end
-
-vim.g.mapleader = " "
-
--- Install your plugins here
-return lazy.setup({
+return {
   -- My plugins here
   "nvim-lua/popup.nvim",   -- An implementation of the Popup API from vim in Neovim
   "nvim-lua/plenary.nvim", -- Useful lua functions used ny lots of plugins
@@ -52,7 +27,7 @@ return lazy.setup({
   },
 
   -- Colorsheme
-  "folke/tokyonight.nvim",
+  { "folke/tokyonight.nvim", lazy = false },
   "norcalli/nvim-colorizer.lua",
 
   -- cmp plugins
@@ -89,9 +64,7 @@ return lazy.setup({
   "theHamsta/nvim-dap-virtual-text",
   "jbyuki/one-small-step-for-vimkind",
   "jay-babu/mason-nvim-dap.nvim",
-  "jbyuki/one-small-step-for-vimkind",
   "mxsdev/nvim-dap-vscode-js",
-  "jbyuki/one-small-step-for-vimkind",
 
   -- Telescope
   "nvim-telescope/telescope.nvim",
@@ -112,4 +85,4 @@ return lazy.setup({
   "weirongxu/plantuml-previewer.vim",
   "tyru/open-browser.vim",
   "aklt/plantuml-syntax",
-})
+}
