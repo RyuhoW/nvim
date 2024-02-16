@@ -6,6 +6,10 @@ if not status_ok then
   return
 end
 
+-- disable netrw at the very start of your init.lua nvim-tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 nvim_tree.setup(
   {
     disable_netrw = true,
